@@ -22,4 +22,12 @@ internal class CaesarCipherTest {
 
         assertEquals(expectedOutput, caesarDecrypt(cipherText, key))
     }
+
+    @Test
+    fun testCaesarCipherCoherency() {
+        val inputText = "Caesar Cipher"
+        val key = 13
+
+        assertEquals(inputText, caesarDecrypt(caesarEncrypt(inputText, key), key))
+    }
 }
