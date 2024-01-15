@@ -1,6 +1,6 @@
 package ciphers
 
-val charToMorseMap = mapOf(
+private val charToMorseMap = mapOf(
     'A' to ".-", 'B' to "-...", 'C' to "-.-.", 'D' to "-..", 'E' to ".",
     'F' to "..-.", 'G' to "--.", 'H' to "....", 'I' to "..", 'J' to ".---",
     'K' to "-.-", 'L' to ".-..", 'M' to "--", 'N' to "-.", 'O' to "---",
@@ -12,7 +12,7 @@ val charToMorseMap = mapOf(
     '8' to "---..", '9' to "----."
 )
 
-val morseToCharMap = charToMorseMap.entries.associate { (k, v) -> v to k }
+private val morseToCharMap = charToMorseMap.entries.associate { (k, v) -> v to k }
 
 fun morseEncrypt(plainText: String): String {
     return plainText.uppercase().map {
