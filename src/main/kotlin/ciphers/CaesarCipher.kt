@@ -13,8 +13,8 @@ private fun charShift(inputChar: Char, shift: Int): Char {
         return inputChar
     }
 
-    val base = if (inputChar.isUpperCase()) 'A' else 'a'
-    val encryptedCharCode = ((inputChar - base + shift) % 26 + 26) % 26 + base.code
+    val baseChar = if (inputChar.isUpperCase()) 'A' else 'a'
+    val encryptedCharCode = ((inputChar - baseChar + shift) + 26) % 26 + baseChar.code
 
     return encryptedCharCode.toChar()
 }
