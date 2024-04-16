@@ -1,9 +1,10 @@
-import ciphers.vigenereDecrypt
-import ciphers.vigenereEncrypt
+import ciphers.VigenereCipher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class VigenereCipherTest {
+
+    private var cipher = VigenereCipher()
 
     @Test
     fun testVigenereEncrypt() {
@@ -11,7 +12,7 @@ internal class VigenereCipherTest {
         val key = "KEY"
         val expectedOutput = "Rijvs"
 
-        assertEquals(expectedOutput, vigenereEncrypt(inputText, key))
+        assertEquals(expectedOutput, cipher.encrypt(inputText, key))
     }
 
     @Test
@@ -20,7 +21,7 @@ internal class VigenereCipherTest {
         val key = "key"
         val expectedOutput = "Cajrp!"
 
-        assertEquals(expectedOutput, vigenereDecrypt(cipherText, key))
+        assertEquals(expectedOutput, cipher.decrypt(cipherText, key))
     }
 
     @Test
@@ -28,6 +29,6 @@ internal class VigenereCipherTest {
         val inputText = "Vigenere"
         val key = "Cipher"
 
-        assertEquals(inputText, vigenereDecrypt(vigenereEncrypt(inputText, key), key))
+        assertEquals(inputText, cipher.decrypt(cipher.encrypt(inputText, key), key))
     }
 }

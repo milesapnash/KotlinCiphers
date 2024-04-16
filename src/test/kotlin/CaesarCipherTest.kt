@@ -1,9 +1,10 @@
-import ciphers.caesarDecrypt
-import ciphers.caesarEncrypt
+import ciphers.CaesarCipher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class CaesarCipherTest {
+
+    private var cipher = CaesarCipher()
 
     @Test
     fun testCaesarEncrypt() {
@@ -11,7 +12,7 @@ internal class CaesarCipherTest {
         val key = 10
         val expectedOutput = "Rovvy"
 
-        assertEquals(expectedOutput, caesarEncrypt(inputText, key))
+        assertEquals(expectedOutput, cipher.encrypt(inputText, key))
     }
 
     @Test
@@ -20,7 +21,7 @@ internal class CaesarCipherTest {
         val key = 16
         val expectedOutput = "World!"
 
-        assertEquals(expectedOutput, caesarDecrypt(cipherText, key))
+        assertEquals(expectedOutput, cipher.decrypt(cipherText, key))
     }
 
     @Test
@@ -28,6 +29,6 @@ internal class CaesarCipherTest {
         val inputText = "Caesar Cipher"
         val key = 13
 
-        assertEquals(inputText, caesarDecrypt(caesarEncrypt(inputText, key), key))
+        assertEquals(inputText, cipher.decrypt(cipher.encrypt(inputText, key), key))
     }
 }

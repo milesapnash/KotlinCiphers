@@ -1,16 +1,17 @@
-import ciphers.morseDecrypt
-import ciphers.morseEncrypt
+import ciphers.MorseCipher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class MorseCipherTest {
+
+    private var cipher = MorseCipher()
 
     @Test
     fun testMorseEncrypt() {
         val inputText = "HELLO"
         val expectedOutput = ".... . .-.. .-.. --- "
 
-        assertEquals(expectedOutput, morseEncrypt(inputText))
+        assertEquals(expectedOutput, cipher.encrypt(inputText))
     }
 
     @Test
@@ -18,13 +19,13 @@ internal class MorseCipherTest {
         val morseCode = ".-- --- .-. .-.. -.."
         val expectedOutput = "WORLD"
 
-        assertEquals(expectedOutput, morseDecrypt(morseCode))
+        assertEquals(expectedOutput, cipher.decrypt(morseCode))
     }
 
     @Test
     fun testMorseCipherCoherency() {
         val inputText = "MORSE CODE"
 
-        assertEquals(inputText, morseDecrypt(morseEncrypt(inputText)))
+        assertEquals(inputText, cipher.decrypt(cipher.encrypt(inputText)))
     }
 }

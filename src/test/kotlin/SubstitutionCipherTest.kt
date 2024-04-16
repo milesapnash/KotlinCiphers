@@ -1,9 +1,10 @@
-import ciphers.substitutionDecrypt
-import ciphers.substitutionEncrypt
+import ciphers.SubstitutionCipher
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class SubstitutionCipherTest {
+
+    private var cipher = SubstitutionCipher()
 
     @Test
     fun testSubstitutionEncrypt() {
@@ -11,7 +12,7 @@ internal class SubstitutionCipherTest {
         val key = "BCDEFGHIJKLMNOPQRSTUVWXYZA"
         val expectedOutput = "GDKKN"
 
-        assertEquals(expectedOutput, substitutionEncrypt(inputText, key))
+        assertEquals(expectedOutput, cipher.encrypt(inputText, key))
     }
 
     @Test
@@ -20,7 +21,7 @@ internal class SubstitutionCipherTest {
         val key = "BCDEFGHIJKLMNOPQRSTUVWXYZA"
         val expectedOutput = "WORLD"
 
-        assertEquals(expectedOutput, substitutionDecrypt(cipherText, key))
+        assertEquals(expectedOutput, cipher.decrypt(cipherText, key))
     }
 
     @Test
@@ -28,6 +29,6 @@ internal class SubstitutionCipherTest {
         val inputText = "SUBSTITUTIONCIPHER"
         val key = "BCDEFGHIJKLMNOPQRSTUVWXYZA"
 
-        assertEquals(inputText, substitutionDecrypt(substitutionEncrypt(inputText, key), key))
+        assertEquals(inputText, cipher.decrypt(cipher.encrypt(inputText, key), key))
     }
 }
